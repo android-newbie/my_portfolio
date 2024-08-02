@@ -5,7 +5,8 @@ import 'package:my_portfolio/utils/links.dart';
 import 'package:my_portfolio/widgets/site_logo.dart';
 
 class HeaderDesktop extends StatelessWidget {
-  const HeaderDesktop({super.key});
+  const HeaderDesktop({super.key, required this.onNavItemTap});
+  final Function(int) onNavItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,9 @@ class HeaderDesktop extends StatelessWidget {
           Spacer(),
           for (int i = 0; i < NavItems.navItems.length; i++)
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                onNavItemTap(i);
+              },
               child: Text(
                 NavItems.navItems[i],
                 style: TextStyle(color: CustomColor.white90),

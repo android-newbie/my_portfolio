@@ -4,17 +4,15 @@ import 'package:flutter/material.dart';
 
 class NavItems {
   static var navItems = [
-    "about",
-    "experience",
-    "skill",
-    "protfilio",
-    "contact"
+    "HOME",
+    "SKILLS",
+    "PROJECTS",
+    "CONTACT",
   ];
   static var navIcons = [
     Icon(Icons.home),
     Icon(Icons.handyman_outlined),
     Icon(Icons.apps),
-    Icon(Icons.web),
     Icon(Icons.quick_contacts_mail),
   ];
 }

@@ -33,6 +33,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final scrollController = ScrollController();
+  final List<GlobalKey> navbarkeys = List.generate(
+    4,
+    (index) => GlobalKey(),
+  );
   @override
   Widget build(BuildContext context) {
     final screenSize =
@@ -44,13 +49,24 @@ class _HomePageState extends State<HomePage> {
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
           key: scaffoldKey,
-          endDrawer: MobileDrawer(),
+          endDrawer: MobileDrawer(
+            onNavItemTap: (value) {
+              //call method
+              scaffoldKey.currentState?.closeEndDrawer();
+              scrollToSection(value);
+            },
+          ),
           backgroundColor: CustomColor.black80,
           body: Column(
             children: [
               // HEADER
               if (constraints.maxWidth > mobileWidth)
-                HeaderDesktop()
+                HeaderDesktop(
+                  onNavItemTap: (value) {
+                    //call method
+                    scrollToSection(value);
+                  },
+                )
               else
                 //HEADER MOBILE
                 HeaderMobile(
@@ -76,13 +92,18 @@ class _HomePageState extends State<HomePage> {
                       //       scaffoldKey.currentState?.openEndDrawer();
                       //     },
                       //   ),
-
+                      SizedBox(
+                        key: navbarkeys.first,
+                      ),
                       //MAIN
                       if (constraints.maxWidth > mobileWidth)
                         MainContainer()
                       else
                         MaincontainerMobile(),
 
+                      SizedBox(
+                        key: navbarkeys[1],
+                      ),
                       //SKILLS
                       if (constraints.maxWidth > mobileWidth)
                         SkillDesktop()
@@ -91,6 +112,7 @@ class _HomePageState extends State<HomePage> {
 
                       // //PROJECTS
                       Container(
+                        key: navbarkeys[2],
                         //we dont set height becoz we want to set height according to our content
                         width: screenWidth,
                         height: screenHeight, // meaning
@@ -99,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Text(
-                              "Projects",
+                              "PROJECTS",
                               style: Maincontainerstyles.piyush(48),
                             ),
                             Container(
@@ -143,6 +165,9 @@ class _HomePageState extends State<HomePage> {
                       ),
 
                       //CONTACTS
+                      SizedBox(
+                        key: navbarkeys[3],
+                      ),
                       if (constraints.maxWidth > mobileWidth)
                         ContactDesktop()
                       else
@@ -159,5 +184,13 @@ class _HomePageState extends State<HomePage> {
             ],
           ));
     });
+  }
+
+  // jump to section method
+
+  void scrollToSection(int navIndex) {
+    final key = navbarkeys[navIndex];
+    Scrollable.ensureVisible(key.currentContext!,
+        duration: Duration(milliseconds: 500), curve: Curves.ease);
   }
 }
