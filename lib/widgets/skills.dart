@@ -10,12 +10,15 @@ class Skills extends StatelessWidget {
     required this.skillWidth,
     required this.skillHeight,
     required this.noCount,
-    required this.flex,
+    required this.flex, this.imgW, this.imgH, this.textSize,
   }) : super(key: key);
   final int skillWidth;
   final int skillHeight;
   final int noCount;
   final int flex;
+  final imgW;
+  final imgH;
+  final textSize;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,6 +41,9 @@ class Skills extends StatelessWidget {
             itemCount: skillItems.length,
             itemBuilder: (context, index) {
               return SkillItemWidget(
+                  imgH:imgH ,
+                  imgW:imgW ,
+                  textSize: textSize,
                   img: skillItems[index]["img"]!,
                   text: skillItems[index]["title"]!);
             },

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/home_page.dart';
 
@@ -14,10 +15,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Piyush Verma',
+      scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
       theme: ThemeData.dark(
         useMaterial3: true,
       ),
       home: HomePage(),
     );
   }
+}
+
+class NoThumbScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.trackpad,
+      };
 }

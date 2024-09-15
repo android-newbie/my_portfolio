@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/styles/mainContainerStyles.dart';
+import 'package:my_portfolio/utils/links.dart';
 import 'package:my_portfolio/widgets/tags.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectCard extends StatelessWidget {
   final String image;
   final String title;
   final String subtitle;
   final List<String> tags;
-  final String? androidLink;
-  final String? iosLink;
-  final String? webLink;
+  final Uri? githubLink;
+  final bool? webVisibility;
+  final Uri? webLink;
+
   const ProjectCard(
       {super.key,
       required this.image,
       required this.title,
       required this.subtitle,
       required this.tags,
-      this.androidLink,
-      this.iosLink,
-      this.webLink});
+      this.githubLink,
+      this.webLink,
+      this.webVisibility});
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +48,35 @@ class ProjectCard extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        await launchUrl(githubLink!);
+                      },
+                      icon: ImageIcon(
+                        AssetImage("lib/assets/icons/githubicon.png"),
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    Visibility(
+                      visible: webVisibility ?? false,
+                      child: IconButton(
+                        onPressed: () async {
+                          await launchUrl(webLink!);
+                        },
+                        icon: ImageIcon(
+                          AssetImage("lib/assets/icons/Website.png"),
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
                 //image
                 Card(
                   color: Colors.white,
@@ -53,7 +85,7 @@ class ProjectCard extends StatelessWidget {
                     height: 215,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(image), fit: BoxFit.none)),
+                            image: NetworkImage(image), fit: BoxFit.cover)),
                   ),
                 ),
                 SizedBox(
@@ -73,8 +105,14 @@ class ProjectCard extends StatelessWidget {
                   height: 10,
                 ),
                 //tags
-                Row(
-                  children: [for (var tag in tags) Tags(tag: tag)],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      children: [for (var tag in tags) Tags(tag: tag)],
+                    ),
+                  ),
                 )
               ],
             ),

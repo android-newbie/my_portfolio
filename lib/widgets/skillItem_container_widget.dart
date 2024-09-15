@@ -7,10 +7,13 @@ class SkillItemWidget extends StatelessWidget {
   const SkillItemWidget({
     Key? key,
     required this.img,
-    required this.text,
+    required this.text, this.textSize, this.imgW, this.imgH,
   }) : super(key: key);
   final String img;
   final String text;
+  final imgW;
+  final imgH;
+  final textSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +25,7 @@ class SkillItemWidget extends StatelessWidget {
           border: Border.all(width: 1, color: CustomColor.white90)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [Image.asset(img), Text(text)],
+        children: [Image.asset(img,width:imgW ,height:imgH ,), Text(text,style: TextStyle(fontSize: textSize),)],
       ),
     );
   }

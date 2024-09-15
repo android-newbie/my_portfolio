@@ -149,6 +149,12 @@ class _HomePageState extends State<HomePage> {
                                       itemCount: projectsList.length,
                                       itemBuilder: (context, index) {
                                         return ProjectCard(
+                                            githubLink:
+                                                projectsList[index].githubLink,
+                                            webVisibility: projectsList[index]
+                                                .webVisibility,
+                                            webLink:
+                                                projectsList[index].webLink,
                                             image: projectsList[index].image,
                                             title: projectsList[index].title,
                                             subtitle:

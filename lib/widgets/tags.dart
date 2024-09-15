@@ -8,9 +8,8 @@ class Tags extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       height: 29,
-      width: 48,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.white)),

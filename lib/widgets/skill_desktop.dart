@@ -50,7 +50,7 @@ class SkillDesktop extends StatelessWidget {
             flex: 2,
           ),
 
-          SizedBox(height: 50),
+          SizedBox(height: 10),
           //SKILLS
           Skills(
             noCount: 4,

@@ -18,6 +18,7 @@ class SkillMobile extends StatelessWidget {
         .width; // and then by using screenSize we can fetch width of the screeen
     final screenHeight = screenSize.height;
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
       height: screenHeight,
       width: double.maxFinite,
       //color: CustomColor.black80 // meaning
@@ -44,7 +45,7 @@ class SkillMobile extends StatelessWidget {
           Platform(
             platformHeight: 60,
             platformWidth: 174,
-            textSize: 12,
+            textSize: 24,
             flex: 1,
           ),
 
@@ -52,9 +53,12 @@ class SkillMobile extends StatelessWidget {
           //SKILLS
           Skills(
             noCount: 2,
-            skillHeight: 51,
-            skillWidth: 158,
+            skillHeight: 100,
+            skillWidth: 250,
             flex: 2,
+            imgH: 60,
+            imgW: 60,
+            textSize: 16,
           ),
         ],
       ),

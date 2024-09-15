@@ -28,32 +28,31 @@ class Platform extends StatelessWidget {
           maxWidth: platformWidth * 2 + 30,
         ),
         child: GridView.builder(
-          
           //shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+              crossAxisCount: 1,
               childAspectRatio: platformWidth / platformHeight,
               mainAxisSpacing: 30,
               crossAxisSpacing: 20),
           itemCount: platformItems.length,
           itemBuilder: (context, index) {
             return SizedBox(
-              
-              height: 100,
-              width: 324,
-              child: GridTile(
-                child: ListTile(
-                  
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  tileColor: CustomColor.black88,
-                  leading: Image.asset(
-                    platformItems[index]["img"]!,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(
-                    platformItems[index]["title"]!,
-                    style: Maincontainerstyles.verma(textSize),
+              child: Center(
+                child: GridTile(
+                  child: Center(
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      tileColor: CustomColor.black88,
+                      leading: Image.asset(
+                        platformItems[index]["img"]!,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(
+                        platformItems[index]["title"]!,
+                        style: Maincontainerstyles.verma(textSize),
+                      ),
+                    ),
                   ),
                 ),
               ),
